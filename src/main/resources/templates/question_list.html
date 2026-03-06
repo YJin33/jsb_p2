@@ -6,8 +6,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="question : ${questionList}">
-        <td th:text="${question.subject}"></td>
+    <tr th:each="question, index : ${questionList}">
+        <td>
+            <!--상세페이지-->
+            <!-- 타임리프에서는 /question/detail/과 같은 문자열과 자바 객체의 값을 더할 때는
+            반드시 다음처럼 |로 좌우를 감싸 주어야 한다.-->
+            <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+        </td>
         <td th:text="${question.createDate}"></td>
     </tr>
     </tbody>

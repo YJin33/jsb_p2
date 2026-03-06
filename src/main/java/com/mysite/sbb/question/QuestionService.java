@@ -1,9 +1,11 @@
 package com.mysite.sbb.question;
 
+import com.mysite.sbb.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -11,7 +13,19 @@ public class QuestionService {
     // questionRepository 객체는 @RequiredArgsConstructor에 의해 생성자 방식으로 주입된다.
     private final QuestionRepository questionRepository;
 
+    //모든 Question 조회
     public List<Question> getList() {
         return this.questionRepository.findAll();
     }
+
+    //특정 Question 조회
+    public Question findById(Integer id) {
+        Optional<Question> question = this.questionRepository.findById(id);
+        if (question.isPresent()) {
+            return question.get();
+        } else {
+            throw new DataNotFoundException("question not found");
+        }
+    }
+
 }

@@ -16,7 +16,7 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @GetMapping("/list")
-    public String list(Model model, @PathVariable("id") Integer id) { //id 매핑, 변수 model로 전달
+    public String list(Model model) { //id 매핑, 변수 model로 전달
         List<Question> questionList = this.questionService.getList();
         model.addAttribute("questionList", questionList);
         return "question_list";
